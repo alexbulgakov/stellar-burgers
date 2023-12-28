@@ -4,7 +4,7 @@ import NavItem from '../nav-item/nav-item';
 
 function AppHeader() {
     return (
-        <header className={`${styles.header} mt-4 mb-4`}>
+        <header className={`${styles.header} pt-4 pb-4`}>
             <nav className={styles.menu}>
                 <NavItem icon={<BurgerIcon type="primary" />} addMargin='mr-2'>Constructor</NavItem>
                 <NavItem icon={<ListIcon type="primary" />}>Orders</NavItem>
