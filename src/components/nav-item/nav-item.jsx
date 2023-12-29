@@ -6,7 +6,7 @@ function NavItem(props) {
             <div className='ml-5 mr-2'>
                 {props.icon}
             </div>
-            <p className="text text_type_main-default mr-5">
+            <p className={`text text_type_main-default mr-5 ${props.isActive ? '' : 'text_color_inactive'}`}>
                 {props.children}
             </p>
         </a>

@@ -6,12 +6,12 @@ function AppHeader() {
     return (
         <header className={`${styles.header} pt-4 pb-4`}>
             <nav className={styles.menu}>
-                <NavItem icon={<BurgerIcon type="primary" />} addMargin='mr-2'>Constructor</NavItem>
-                <NavItem icon={<ListIcon type="primary" />}>Orders</NavItem>
+                <NavItem icon={<BurgerIcon type="primary" />} addMargin='mr-2' isActive={true}>Constructor</NavItem>
+                <NavItem icon={<ListIcon type="secondary" />} isActive={false}>Orders</NavItem>
             </nav>
             <Logo />
             <nav>
-                <NavItem icon={<ProfileIcon type="primary" />}>Your profile</NavItem>
+                <NavItem icon={<ProfileIcon type="secondary" />} isActive={false}>Your profile</NavItem>
             </nav>
         </header>
     );

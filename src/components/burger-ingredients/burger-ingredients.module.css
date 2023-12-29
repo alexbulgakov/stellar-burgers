@@ -1,0 +1,29 @@
+.tab {
+    display: flex;
+}
+
+.allIngredients{
+    max-width: 600px;
+}
+
+.groupedIngredients {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 32px 24px;
+}
+
+.currency {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.ingredientName {
+    text-align: center;
+}
+
+.ingredient {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
