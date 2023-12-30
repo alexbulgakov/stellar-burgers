@@ -2,8 +2,38 @@
     display: flex;
 }
 
-.allIngredients{
+.chooseIngredients {
     max-width: 600px;
+    max-height: 912px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.ingredientsList {
+    max-height: 680px;
+    overflow-y: auto;
+
+    /* Scroll for Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #8585AD #2F2F37;
+}
+
+/* Scroll for Chrome, Safari, Edge */
+.ingredientsList::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ingredientsList::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+
+.ingredientsList::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border-radius: 4px;
+}
+
+.ingredientsList::-webkit-scrollbar-thumb:hover {
+    background: #6f6f9d;
 }
 
 .groupedIngredients {
@@ -25,5 +55,4 @@
 .ingredient {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }

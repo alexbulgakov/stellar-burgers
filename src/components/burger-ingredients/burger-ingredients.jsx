@@ -34,7 +34,7 @@ function BurgerIngredients({ data }) {
     );
 
     return (
-        <section className={styles.allIngredients}>
+        <section className={styles.chooseIngredients}>
             <p className="text text_type_main-large mt-10 mb-5">
                 Choose ingredients
             </p>
@@ -49,28 +49,30 @@ function BurgerIngredients({ data }) {
                     Filling
                 </Tab>
             </div>
-            <div className='mt-10'>
-                <p className="text text_type_main-medium">
-                    Buns
-                </p>
-                <div className={`${styles.groupedIngredients} mt-6 ml-4`}>
-                    {groupedData.bun && renderGroup(groupedData.bun)}
+            <div className={styles.ingredientsList}>
+                <div className='mt-10'>
+                    <p className="text text_type_main-medium">
+                        Buns
+                    </p>
+                    <div className={`${styles.groupedIngredients} mt-6`}>
+                        {groupedData.bun && renderGroup(groupedData.bun)}
+                    </div>
                 </div>
-            </div>
-            <div className='mt-10'>
-                <p className="text text_type_main-medium">
-                    Sauces
-                </p>
-                <div className={`${styles.groupedIngredients} mt-6 ml-4`}>
-                    {groupedData.sauce && renderGroup(groupedData.sauce)}
+                <div className='mt-10'>
+                    <p className="text text_type_main-medium">
+                        Sauces
+                    </p>
+                    <div className={`${styles.groupedIngredients} mt-6`}>
+                        {groupedData.sauce && renderGroup(groupedData.sauce)}
+                    </div>
                 </div>
-            </div>
-            <div className='mt-10'>
-                <p className="text text_type_main-medium">
-                    Filling
-                </p>
-                <div className={`${styles.groupedIngredients} mt-6 ml-4`}>
-                    {groupedData.main && renderGroup(groupedData.main)}
+                <div className='mt-10'>
+                    <p className="text text_type_main-medium">
+                        Filling
+                    </p>
+                    <div className={`${styles.groupedIngredients} mt-6`}>
+                        {groupedData.main && renderGroup(groupedData.main)}
+                    </div>
                 </div>
             </div>
         </section>
