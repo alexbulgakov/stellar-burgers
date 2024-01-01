@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Tab, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 
 
@@ -21,6 +21,9 @@ function BurgerIngredients({ data }) {
     const renderGroup = (group) => (
         group.map(ingredient => (
             <div key={ingredient._id} className={styles.ingredient}>
+                {ingredient._id === '60666c42cc7b410027a1a9b1' &&
+                    <Counter count={1} size="default" extraClass="m-1" />
+                }
                 <img src={ingredient.image} className='pl-4 pr-4' alt={`${ingredient.type} image`} />
                 <div className={`${styles.currency} mt-1 mb-1`}>
                     <p className="text text_type_digits-default mr-1">{ingredient.price}</p>
