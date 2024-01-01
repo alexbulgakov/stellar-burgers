@@ -3,10 +3,8 @@
 }
 
 .chooseIngredients {
-    max-width: 600px;
+    min-width: 600px;
     max-height: 912px;
-    overflow-y: hidden;
-    overflow-x: hidden;
 }
 
 .ingredientsList {
