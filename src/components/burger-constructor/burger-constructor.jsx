@@ -12,7 +12,7 @@ function BurgerConstructor({ data }) {
 
     const selectedIngredients = data.filter((item) => {
         return item.type === 'main' || item.type === 'sauce';
-    })
+    });
 
     return (
         <section className={`${styles.burgerConstructor} mt-25 ml-10`}>
@@ -28,7 +28,7 @@ function BurgerConstructor({ data }) {
 
             <div className={styles.movableIngredients}>
                 {selectedIngredients.map(ingredient => (
-                    <div className={styles.ingredient}>
+                    <div key={ingredient._id} className={styles.ingredient}>
                         <DragIcon type="primary" />
                         <ConstructorElement
                             text={ingredient.name}
