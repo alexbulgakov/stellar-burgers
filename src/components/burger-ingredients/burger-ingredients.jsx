@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
-
+import { Tab, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import useWindowSize from '../hooks/useWindowSize';
 
 function BurgerIngredients({ data }) {
     const [current, setCurrent] = useState('one');
+    const [width, height] = useWindowSize();
 
     const groupByType = (data) => {
         return data.reduce((acc, item) => {
@@ -24,7 +25,7 @@ function BurgerIngredients({ data }) {
                 {ingredient._id === '60666c42cc7b410027a1a9b1' &&
                     <Counter count={1} size="default" extraClass="m-1" />
                 }
-                <img src={ingredient.image} className='pl-4 pr-4' alt={`${ingredient.type} image`} />
+                <img src={ingredient.image} className={width < 1248 ? '' : 'pl-4 pr-4'} alt={`${ingredient.type} image`} />
                 <div className={`${styles.currency} mt-1 mb-1`}>
                     <p className="text text_type_digits-default mr-1">{ingredient.price}</p>
                     <CurrencyIcon type="primary" />
@@ -37,7 +38,7 @@ function BurgerIngredients({ data }) {
     );
 
     return (
-        <section className={styles.chooseIngredients}>
+        <section className={`${styles.chooseIngredients} ${width < 614 ? '' : 'pl-2'}`}>
             <p className="text text_type_main-large mt-10 mb-5">
                 Choose ingredients
             </p>
@@ -54,7 +55,7 @@ function BurgerIngredients({ data }) {
             </div>
             <div className={styles.ingredientsList}>
                 <div className='mt-10'>
-                    <p className="text text_type_main-medium">
+                    <p className={`${width < 1248 ? 'ml-4' : ''} text text_type_main-medium`} >
                         Buns
                     </p>
                     <div className={`${styles.groupedIngredients} mt-6`}>
@@ -62,7 +63,7 @@ function BurgerIngredients({ data }) {
                     </div>
                 </div>
                 <div className='mt-10'>
-                    <p className="text text_type_main-medium">
+                    <p className={`${width < 1248 ? 'ml-4' : ''} text text_type_main-medium`}>
                         Sauces
                     </p>
                     <div className={`${styles.groupedIngredients} mt-6`}>
@@ -70,7 +71,7 @@ function BurgerIngredients({ data }) {
                     </div>
                 </div>
                 <div className='mt-10'>
-                    <p className="text text_type_main-medium">
+                    <p className={`${width < 1248 ? 'ml-4' : ''} text text_type_main-medium`}>
                         Filling
                     </p>
                     <div className={`${styles.groupedIngredients} mt-6`}>

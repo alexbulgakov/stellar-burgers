@@ -1,7 +1,11 @@
-import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
+import useWindowSize from '../hooks/useWindowSize';
+import Checkout from '../checkout/checkout';
 
 function BurgerConstructor({ data }) {
+    const [width, height] = useWindowSize();
+
     const topBun = data.find((item) => {
         return (item._id === '60666c42cc7b410027a1a9b1');
     });
@@ -15,8 +19,8 @@ function BurgerConstructor({ data }) {
     });
 
     return (
-        <section className={`${styles.burgerConstructor} mt-25 ml-10`}>
-            <div className='ml-8 mb-4'>
+        <section className={`${styles.burgerConstructor} pr-2 mt-25 ${width < 1248 ? 'ml-4' : 'ml-10'}`}>
+            <div className={`${styles.bun} ml-8 mb-4`}>
                 <ConstructorElement
                     type="top"
                     isLocked={true}
@@ -26,7 +30,7 @@ function BurgerConstructor({ data }) {
                 />
             </div>
 
-            <div className={styles.movableIngredients}>
+            <div className={`${styles.movableIngredients} pr-2`}>
                 {selectedIngredients.map(ingredient => (
                     <div key={ingredient._id} className={styles.ingredient}>
                         <DragIcon type="primary" />
@@ -38,7 +42,7 @@ function BurgerConstructor({ data }) {
                     </div>
                 ))}
             </div>
-            <div className='ml-8 mt-4'>
+            <div className={`${styles.bun} ml-8 mb-4 mt-4`}>
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
@@ -48,15 +52,7 @@ function BurgerConstructor({ data }) {
                 />
             </div>
 
-            <div className={`${styles.checkout} mt-10 mr-4`}>
-                <div className={`${styles.price} mr-10`}>
-                    <p className="text text_type_digits-medium mr-1">610</p>
-                    <CurrencyIcon type="primary" />
-                </div>
-                <Button htmlType="button" type="primary" size="medium">
-                    Place an order
-                </Button>
-            </div>
+            <Checkout text='Place an order' />
         </section>
     );
 }

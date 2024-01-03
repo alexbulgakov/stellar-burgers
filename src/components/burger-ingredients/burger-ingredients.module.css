@@ -1,10 +1,10 @@
-.tab {
-    display: flex;
+.chooseIngredients {
+    max-height: 912px;
+    max-width: 600px;
 }
 
-.chooseIngredients {
-    min-width: 600px;
-    max-height: 912px;
+.tab {
+    display: flex;
 }
 
 .ingredientsList {
@@ -36,7 +36,7 @@
 
 .groupedIngredients {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
     grid-gap: 32px 24px;
 }
 
@@ -54,4 +54,26 @@
     display: flex;
     flex-direction: column;
     position: relative;
+}
+
+@media screen and (max-width: 1206px) {
+    .tab {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 1021px) {
+    .tab {
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width: 614px) {
+    .tab {
+        flex-direction: column;
+    }
+
+    .ingredientsList {
+        overflow: hidden;
+    }
 }
