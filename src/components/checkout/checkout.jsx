@@ -7,7 +7,7 @@ import styles from './checkout.module.css';
 
 function Checkout({ text }) {
   return (
-    <div className={`${styles.checkout} mt-10 mr-4 pb-4`}>
+    <div className={`${styles.checkout} mr-4`}>
       <div className={`${styles.price} mr-4`}>
         <p className="text text_type_digits-medium mr-1">610</p>
         <CurrencyIcon type="primary" />

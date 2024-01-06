@@ -3,15 +3,37 @@ import { useState } from 'react';
 import {
   CurrencyIcon,
   Counter,
-  Tab,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 
 import useWindowSize from '../../hooks/useWindowSize';
 
 import styles from './burger-ingredients.module.css';
 
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      aria-labelledby={`simple-tab-${index}`}
+      id={`simple-tabpanel-${index}`}
+      hidden={value !== index}
+      role="tabpanel"
+      {...other}
+    >
+      {value === index && <Box>{children}</Box>}
+    </div>
+  );
+}
+
 function BurgerIngredients({ data }) {
-  const [current, setCurrent] = useState('one');
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   const [width] = useWindowSize();
 
   const groupByType = (ingredients) =>
@@ -48,60 +70,81 @@ function BurgerIngredients({ data }) {
       </div>
     ));
 
+  function a11yProps(index) {
+    return {
+      'aria-controls': `simple-tabpanel-${index}`,
+      id: `simple-tab-${index}`,
+    };
+  }
+
   return (
     <section
       className={`${styles.chooseIngredients} ${width < 614 ? '' : 'pl-2'}`}
     >
       <p className="text text_type_main-large mt-10 mb-5">Choose ingredients</p>
-      <div className={styles.tab}>
-        <Tab active={current === 'one'} onClick={setCurrent} value="one">
-          Buns
-        </Tab>
-        <Tab active={current === 'two'} onClick={setCurrent} value="two">
-          Sauces
-        </Tab>
-        <Tab active={current === 'three'} onClick={setCurrent} value="three">
-          Filling
-        </Tab>
-      </div>
-      <div className={styles.ingredientsList}>
-        <div className="mt-10">
-          <p
-            className={`${
-              width < 1248 ? 'ml-4' : ''
-            } text text_type_main-medium`}
+      <Box>
+        <Box>
+          <Tabs
+            aria-label="basic tabs example"
+            onChange={handleChange}
+            variant="fullWidth"
+            textColor="inherit"
+            value={value}
           >
-            Buns
-          </p>
-          <div className={`${styles.groupedIngredients} mt-6`}>
-            {groupedData.bun && renderGroup(groupedData.bun)}
+            <Tab label="Buns" {...a11yProps(0)} />
+            <Tab label="Sauces" {...a11yProps(1)} />
+            <Tab label="Filling" {...a11yProps(2)} />
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={value} index={0}>
+          <div className={styles.ingredientsList}>
+            <div className="mt-10">
+              <p
+                className={`${
+                  width < 1248 ? 'ml-4' : ''
+                } text text_type_main-medium`}
+              >
+                Buns
+              </p>
+              <div className={`${styles.groupedIngredients} mt-6`}>
+                {groupedData.bun && renderGroup(groupedData.bun)}
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="mt-10">
-          <p
-            className={`${
-              width < 1248 ? 'ml-4' : ''
-            } text text_type_main-medium`}
-          >
-            Sauces
-          </p>
-          <div className={`${styles.groupedIngredients} mt-6`}>
-            {groupedData.sauce && renderGroup(groupedData.sauce)}
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          <div className={styles.ingredientsList}>
+            <div className="mt-10">
+              <p
+                className={`${
+                  width < 1248 ? 'ml-4' : ''
+                } text text_type_main-medium`}
+              >
+                Sauces
+              </p>
+              <div className={`${styles.groupedIngredients} mt-6`}>
+                {groupedData.sauce && renderGroup(groupedData.sauce)}
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="mt-10">
-          <p
-            className={`${
-              width < 1248 ? 'ml-4' : ''
-            } text text_type_main-medium`}
-          >
-            Filling
-          </p>
-          <div className={`${styles.groupedIngredients} mt-6`}>
-            {groupedData.main && renderGroup(groupedData.main)}
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={2}>
+          <div className={styles.ingredientsList}>
+            <div className="mt-10">
+              <p
+                className={`${
+                  width < 1248 ? 'ml-4' : ''
+                } text text_type_main-medium`}
+              >
+                Filling
+              </p>
+              <div className={`${styles.groupedIngredients} mt-6`}>
+                {groupedData.main && renderGroup(groupedData.main)}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </CustomTabPanel>
+      </Box>
     </section>
   );
 }

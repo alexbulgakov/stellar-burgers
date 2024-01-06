@@ -1,79 +1,84 @@
 .chooseIngredients {
-    max-height: 912px;
-    max-width: 600px;
+  max-height: 912px;
+  max-width: 600px;
 }
 
 .tab {
-    display: flex;
+  display: flex;
 }
 
 .ingredientsList {
-    max-height: 680px;
-    overflow-y: auto;
+  max-height: 680px;
+  overflow-y: auto;
 
-    /* Scroll for Firefox */
-    scrollbar-width: thin;
-    scrollbar-color: #8585AD #2F2F37;
+  /* Scroll for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #8585ad #2f2f37;
 }
 
 /* Scroll for Chrome, Safari, Edge */
 .ingredientsList::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .ingredientsList::-webkit-scrollbar-track {
-    background: #2F2F37;
+  background: #2f2f37;
 }
 
 .ingredientsList::-webkit-scrollbar-thumb {
-    background: #8585AD;
-    border-radius: 4px;
+  background: #8585ad;
+  border-radius: 4px;
 }
 
 .ingredientsList::-webkit-scrollbar-thumb:hover {
-    background: #6f6f9d;
+  background: #6f6f9d;
 }
 
 .groupedIngredients {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
-    grid-gap: 32px 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  grid-gap: 32px 24px;
 }
 
 .currency {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .ingredientName {
-    text-align: center;
+  text-align: center;
 }
 
 .ingredient {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 @media screen and (max-width: 1206px) {
-    .tab {
-        flex-direction: column;
-    }
+  .tab {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 1021px) {
-    .tab {
-        flex-direction: row;
-    }
+  .tab {
+    flex-direction: row;
+  }
 }
 
 @media screen and (max-width: 614px) {
-    .tab {
-        flex-direction: column;
-    }
+  .tab {
+    flex-direction: column;
+  }
 
-    .ingredientsList {
-        overflow: hidden;
-    }
+  .ingredientsList {
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+
+  .ingredientsList::-webkit-scrollbar {
+    display: none;
+  }
 }

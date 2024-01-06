@@ -9,6 +9,10 @@ import NavItem from '../nav-item/nav-item';
 
 import styles from './app-header.module.css';
 
+/**
+ * Component implementing the rendering of a header with navigation.
+ */
+
 function AppHeader() {
   return (
     <header className={`${styles.header} pt-4 pb-4`}>
