@@ -20,18 +20,20 @@ function AppHeaderMobile() {
   };
 
   return (
-    <header className={`${styles.header} p-4`}>
-      {width < 425 ? <img alt="logo" src={logo} /> : <Logo />}
-      <button
-        className={styles.burger}
-        onClick={toggleMenu}
-        aria-label="menu"
-        type="button"
-      >
-        <MenuIcon type="primary" />
-      </button>
+    <>
+      <header className={`${styles.header} pl-4 pr-4 pb-2 pt-2`}>
+        {width < 425 ? <img alt="logo" src={logo} /> : <Logo />}
+        <button
+          className={styles.burger}
+          onClick={toggleMenu}
+          aria-label="menu"
+          type="button"
+        >
+          <MenuIcon type="primary" />
+        </button>
+      </header>
       {isOpen && <Menu toggleMenu={toggleMenu} />}
-    </header>
+    </>
   );
 }
 

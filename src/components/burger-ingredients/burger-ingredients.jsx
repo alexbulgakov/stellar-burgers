@@ -79,9 +79,17 @@ function BurgerIngredients({ data }) {
 
   return (
     <section
-      className={`${styles.chooseIngredients} ${width < 614 ? '' : 'pl-2'}`}
+      className={`${styles.chooseIngredients} ${width < 514 ? '' : ' mb-4'}`}
     >
-      <p className="text text_type_main-large mt-10 mb-5">Choose ingredients</p>
+      <p
+        className={`text text_type_main-large  ${
+          width < 1024 ? 'mt-4 mb-2 ml-2' : 'mt-10 mb-5'
+        } ${width < 425 ? 'text_type_main-medium' : 'text_type_main-large'} ${
+          styles.description
+        }`}
+      >
+        Choose ingredients
+      </p>
       <Box>
         <Box>
           <Tabs

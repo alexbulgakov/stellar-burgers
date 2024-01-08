@@ -3,10 +3,6 @@
   max-width: 600px;
 }
 
-.tab {
-  display: flex;
-}
-
 .ingredientsList {
   max-height: 680px;
   overflow-y: auto;
@@ -56,23 +52,7 @@
   position: relative;
 }
 
-@media screen and (max-width: 1206px) {
-  .tab {
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 1021px) {
-  .tab {
-    flex-direction: row;
-  }
-}
-
 @media screen and (max-width: 614px) {
-  .tab {
-    flex-direction: column;
-  }
-
   .ingredientsList {
     overflow-y: scroll;
     scrollbar-width: none;
@@ -80,5 +60,9 @@
 
   .ingredientsList::-webkit-scrollbar {
     display: none;
+  }
+
+  .description {
+    text-align: center;
   }
 }

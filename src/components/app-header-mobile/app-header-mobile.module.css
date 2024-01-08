@@ -1,18 +1,27 @@
 .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1C1C21;
-    min-height: 82px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1c1c21;
+  min-height: 72px;
 }
 
 .burger {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+@media screen and (max-width: 514px) {
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
