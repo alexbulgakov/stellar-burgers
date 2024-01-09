@@ -1,7 +1,22 @@
 .main {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: min-content;
-    display: flex;
-    flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+
+.mainMobile {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 514px) {
+  .mainMobile {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
 }

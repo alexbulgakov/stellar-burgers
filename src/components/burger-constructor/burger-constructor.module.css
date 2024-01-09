@@ -1,5 +1,5 @@
 .burgerConstructor {
-    min-width: 600px;
+    max-width: 600px;
     max-height: 912px;
 }
 
@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    min-width: 549px;
 }
 
 .movableIngredients {
@@ -15,6 +16,7 @@
     gap: 10px;
     max-height: 464px;
     overflow-y: auto;
+    overflow-x: hidden;
 
     /* Scroll for Firefox */
     scrollbar-width: thin;
@@ -39,15 +41,7 @@
     background: #6f6f9d;
 }
 
-.checkout{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
+.bun {
+    max-width: 520px;
 }
 
-.price {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}

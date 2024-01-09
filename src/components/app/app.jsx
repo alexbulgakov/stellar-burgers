@@ -1,14 +1,37 @@
-import AppHeader from '../app-header/app-header';
-import styles from './app.module.css';
-import { data } from '../../utils/data';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+import AppHeaderMobile from '../app-header-mobile/app-header-mobile';
+import AppFooterMobile from '../app-footer-mobile/app-footer-mobile';
+import useWindowSize from '../../hooks/useWindowSize';
+import AppHeader from '../app-header/app-header';
+import { data } from '../../utils/data';
+
+import styles from './app.module.css';
+
+/**
+ * Top-level component that implements conditional rendering
+ * based on screen width.
+ */
+
+//TODO:improve mobile layout(toggle order) using redux and reusing header
 
 function App() {
-  return (
+  const [width] = useWindowSize();
+
+  return width < 1024 ? (
+    <>
+      <AppHeaderMobile />
+      <main className={styles.mainMobile}>
+        <BurgerIngredients data={data} />
+      </main>
+      <AppFooterMobile>
+        <BurgerConstructor data={data} />
+      </AppFooterMobile>
+    </>
+  ) : (
     <>
       <AppHeader />
-      <main className={styles.main}>
+      <main className={`${styles.main} pb-2`}>
         <BurgerIngredients data={data} />
         <BurgerConstructor data={data} />
       </main>
