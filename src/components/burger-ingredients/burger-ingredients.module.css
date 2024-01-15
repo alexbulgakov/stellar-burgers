@@ -81,4 +81,7 @@
   .ingredientsList {
     max-height: 600px;
   }
+  .chooseIngredients {
+    max-height: 600px;
+  }
 }

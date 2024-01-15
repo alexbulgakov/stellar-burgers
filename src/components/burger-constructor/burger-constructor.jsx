@@ -11,11 +11,9 @@ import styles from './burger-constructor.module.css';
 function BurgerConstructor({ data }) {
   const [width] = useWindowSize();
 
-  const topBun = data.find((item) => item._id === '60666c42cc7b410027a1a9b1');
+  const topBun = data.find((item) => item.type === 'bun');
 
-  const bottomBun = data.find(
-    (item) => item._id === '60666c42cc7b410027a1a9b1',
-  );
+  const bottomBun = data.find((item) => item.type === 'bun');
 
   const selectedIngredients = data.filter(
     (item) => item.type === 'main' || item.type === 'sauce',
