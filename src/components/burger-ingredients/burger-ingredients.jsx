@@ -78,15 +78,13 @@ function BurgerIngredients({ data }) {
   }
 
   return (
-    <section
-      className={`${styles.chooseIngredients} ${width < 514 ? '' : ' mb-4'}`}
-    >
+    <section className={styles.chooseIngredients}>
       <p
         className={`text text_type_main-large  ${
-          width < 1024 ? 'mt-4 mb-2 ml-2' : 'mt-10 mb-5'
-        } ${width < 425 ? 'text_type_main-medium' : 'text_type_main-large'} ${
-          styles.description
-        }`}
+          width < 1024 ? 'mt-2 mb-2 ml-2' : 'mt-10 mb-5'
+        } ${
+          width < 514 ? 'mt-6 text_type_main-medium' : 'text_type_main-large'
+        } ${styles.description}`}
       >
         Choose ingredients
       </p>
@@ -106,49 +104,22 @@ function BurgerIngredients({ data }) {
         </Box>
         <CustomTabPanel value={value} index={0}>
           <div className={styles.ingredientsList}>
-            <div className="mt-10">
-              <p
-                className={`${
-                  width < 1248 ? 'ml-4' : ''
-                } text text_type_main-medium`}
-              >
-                Buns
-              </p>
-              <div className={`${styles.groupedIngredients} mt-6`}>
-                {groupedData.bun && renderGroup(groupedData.bun)}
-              </div>
+            <div className={styles.groupedIngredients}>
+              {groupedData.bun && renderGroup(groupedData.bun)}
             </div>
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <div className={styles.ingredientsList}>
-            <div className="mt-10">
-              <p
-                className={`${
-                  width < 1248 ? 'ml-4' : ''
-                } text text_type_main-medium`}
-              >
-                Sauces
-              </p>
-              <div className={`${styles.groupedIngredients} mt-6`}>
-                {groupedData.sauce && renderGroup(groupedData.sauce)}
-              </div>
+            <div className={styles.groupedIngredients}>
+              {groupedData.sauce && renderGroup(groupedData.sauce)}
             </div>
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           <div className={styles.ingredientsList}>
-            <div className="mt-10">
-              <p
-                className={`${
-                  width < 1248 ? 'ml-4' : ''
-                } text text_type_main-medium`}
-              >
-                Filling
-              </p>
-              <div className={`${styles.groupedIngredients} mt-6`}>
-                {groupedData.main && renderGroup(groupedData.main)}
-              </div>
+            <div className={styles.groupedIngredients}>
+              {groupedData.main && renderGroup(groupedData.main)}
             </div>
           </div>
         </CustomTabPanel>

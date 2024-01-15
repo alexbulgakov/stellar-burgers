@@ -4,9 +4,9 @@
 }
 
 .ingredientsList {
-  max-height: 680px;
+  max-height: 570px;
   overflow-y: auto;
-
+  margin-top: 16px;
   /* Scroll for Firefox */
   scrollbar-width: thin;
   scrollbar-color: #8585ad #2f2f37;
@@ -64,5 +64,24 @@
 
   .description {
     text-align: center;
+  }
+
+  .groupedIngredients {
+    grid-gap: 16px 8px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .chooseIngredients {
+    max-height: 580px;
+  }
+}
+
+@media screen and (max-width: 514px) {
+  .ingredientsList {
+    max-height: 600px;
+  }
+  .chooseIngredients {
+    max-height: 600px;
   }
 }

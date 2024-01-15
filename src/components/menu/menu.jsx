@@ -17,9 +17,10 @@ function Menu({ toggleMenu }) {
   const toggleProfileMenu = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div className={`${styles.menu}`}>
-      <div className={`${styles.header} pl-4 pr-4 pb-2 pt-2`}>
+      <div className={`${styles.menuHeader} pl-4 pr-4 pb-2 pt-2`}>
         <p className="text text_type_main-large ">Menu</p>
         <button className={styles.close} onClick={toggleMenu}>
           <CloseIcon type="primary" />

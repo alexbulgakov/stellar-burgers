@@ -9,7 +9,7 @@
   z-index: 100;
 }
 
-.header {
+.menuHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
