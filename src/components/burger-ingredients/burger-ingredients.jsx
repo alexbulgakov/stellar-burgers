@@ -9,6 +9,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 import useWindowSize from '../../hooks/useWindowSize';
+import Modal from '../modal/modal';
 
 import styles from './burger-ingredients.module.css';
 
@@ -30,6 +31,17 @@ function CustomTabPanel(props) {
 
 function BurgerIngredients({ data }) {
   const [value, setValue] = useState(0);
+  const [visibleModal, setVisibleModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setVisibleModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setVisibleModal(false);
+  };
+
+  const modal = <Modal onClose={handleCloseModal}></Modal>;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -49,8 +61,12 @@ function BurgerIngredients({ data }) {
 
   const renderGroup = (group) =>
     group.map((ingredient) => (
-      <div className={styles.ingredient} key={ingredient._id}>
-        {ingredient._id === '60666c42cc7b410027a1a9b1' && (
+      <div
+        className={styles.ingredient}
+        onClick={handleOpenModal}
+        key={ingredient._id}
+      >
+        {ingredient._id === '60666c42cc7b410027a1a9b1' && ( /////////id
           <Counter extraClass="m-1" size="default" count={1} />
         )}
         <img
@@ -124,6 +140,7 @@ function BurgerIngredients({ data }) {
           </div>
         </CustomTabPanel>
       </Box>
+      {visibleModal && modal}
     </section>
   );
 }

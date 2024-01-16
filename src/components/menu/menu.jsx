@@ -22,14 +22,14 @@ function Menu({ toggleMenu }) {
     <div className={`${styles.menu}`}>
       <div className={`${styles.menuHeader} pl-4 pr-4 pb-2 pt-2`}>
         <p className="text text_type_main-large ">Menu</p>
-        <button className={styles.close} onClick={toggleMenu}>
+        <button onClick={toggleMenu}>
           <CloseIcon type="primary" />
         </button>
       </div>
       <nav className={`${styles.nav} ml-4`}>
         <ul className={styles.list}>
           <li>
-            <button className={styles.profileMenu} onClick={toggleProfileMenu}>
+            <button onClick={toggleProfileMenu}>
               <div className={`${styles.navItem}`}>
                 <ProfileIcon type="primary" />
                 <p className="text text_type_main-medium ml-2 mr-10">

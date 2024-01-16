@@ -1,6 +1,7 @@
 .chooseIngredients {
   max-height: 912px;
-  max-width: 600px;
+  width: 600px;
+  position: relative;
 }
 
 .ingredientsList {
@@ -49,7 +50,7 @@
 .ingredient {
   display: flex;
   flex-direction: column;
-  position: relative;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 614px) {
@@ -68,6 +69,13 @@
 
   .groupedIngredients {
     grid-gap: 16px 8px;
+  }
+}
+
+@media screen and (max-width: 1191px) {
+  .chooseIngredients {
+    width: auto;
+    max-width: 600px;
   }
 }
 

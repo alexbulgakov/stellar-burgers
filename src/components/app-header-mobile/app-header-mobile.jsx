@@ -23,12 +23,7 @@ function AppHeaderMobile() {
     <>
       <header className={`${styles.header} pl-4 pr-4 pb-2 pt-2`}>
         {width < 425 ? <img alt="logo" src={logo} /> : <Logo />}
-        <button
-          className={styles.burger}
-          onClick={toggleMenu}
-          aria-label="menu"
-          type="button"
-        >
+        <button onClick={toggleMenu} aria-label="menu" type="button">
           <MenuIcon type="primary" />
         </button>
       </header>
