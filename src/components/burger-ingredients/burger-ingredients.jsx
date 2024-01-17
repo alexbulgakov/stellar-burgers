@@ -8,6 +8,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
+import IngredientDetails from '../ingredient-details/ingredient-details';
 import useWindowSize from '../../hooks/useWindowSize';
 import Modal from '../modal/modal';
 
@@ -32,16 +33,16 @@ function CustomTabPanel(props) {
 function BurgerIngredients({ data }) {
   const [value, setValue] = useState(0);
   const [visibleModal, setVisibleModal] = useState(false);
+  const [currentIngredientInModal, setCurrentIngredientInModal] = useState({});
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (ingredient) => {
     setVisibleModal(true);
+    setCurrentIngredientInModal(ingredient);
   };
 
   const handleCloseModal = () => {
     setVisibleModal(false);
   };
-
-  const modal = <Modal onClose={handleCloseModal}></Modal>;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -62,13 +63,15 @@ function BurgerIngredients({ data }) {
   const renderGroup = (group) =>
     group.map((ingredient) => (
       <div
+        onClick={() => {
+          handleOpenModal(ingredient);
+        }}
         className={styles.ingredient}
-        onClick={handleOpenModal}
         key={ingredient._id}
       >
-        {ingredient._id === '60666c42cc7b410027a1a9b1' && ( /////////id
+        {/* {ingredient.type === 'bun' && (
           <Counter extraClass="m-1" size="default" count={1} />
-        )}
+        )} */}
         <img
           className={width < 1248 ? '' : 'pl-4 pr-4'}
           alt={`${ingredient.type}`}
@@ -140,7 +143,11 @@ function BurgerIngredients({ data }) {
           </div>
         </CustomTabPanel>
       </Box>
-      {visibleModal && modal}
+      {visibleModal && (
+        <Modal header="Ingredient details" onClose={handleCloseModal}>
+          <IngredientDetails ingredient={currentIngredientInModal} />
+        </Modal>
+      )}
     </section>
   );
 }

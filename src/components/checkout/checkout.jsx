@@ -7,7 +7,7 @@ import useWindowSize from '../../hooks/useWindowSize';
 
 import styles from './checkout.module.css';
 
-function Checkout({ toggleOrder, text }) {
+function Checkout({ onClick, text }) {
   const [width] = useWindowSize();
 
   return (
@@ -22,12 +22,7 @@ function Checkout({ toggleOrder, text }) {
         </p>
         <CurrencyIcon type="primary" />
       </div>
-      <Button
-        onClick={toggleOrder}
-        htmlType="button"
-        type="primary"
-        size="medium"
-      >
+      <Button onClick={onClick} htmlType="button" type="primary" size="medium">
         {text}
       </Button>
     </div>

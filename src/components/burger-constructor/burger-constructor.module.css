@@ -1,47 +1,47 @@
 .burgerConstructor {
-    max-width: 600px;
-    max-height: 912px;
+  max-width: 600px;
+  max-height: 912px;
+  position: relative;
 }
 
 .ingredient {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    min-width: 549px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 549px;
 }
 
 .movableIngredients {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-height: 464px;
-    overflow-y: auto;
-    overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 464px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-    /* Scroll for Firefox */
-    scrollbar-width: thin;
-    scrollbar-color: #8585AD #2F2F37;
+  /* Scroll for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #8585ad #2f2f37;
 }
 
 /* Scroll for Chrome, Safari, Edge */
 .movableIngredients::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .movableIngredients::-webkit-scrollbar-track {
-    background: #2F2F37;
+  background: #2f2f37;
 }
 
 .movableIngredients::-webkit-scrollbar-thumb {
-    background: #8585AD;
-    border-radius: 4px;
+  background: #8585ad;
+  border-radius: 4px;
 }
 
 .movableIngredients::-webkit-scrollbar-thumb:hover {
-    background: #6f6f9d;
+  background: #6f6f9d;
 }
 
 .bun {
-    max-width: 520px;
+  max-width: 520px;
 }
-

@@ -1,15 +1,28 @@
+import { useState } from 'react';
+
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import OrderDetails from '../order-details/order-details';
 import useWindowSize from '../../hooks/useWindowSize';
 import Checkout from '../checkout/checkout';
+import Modal from '../modal/modal';
 
 import styles from './burger-constructor.module.css';
 
 function BurgerConstructor({ data }) {
   const [width] = useWindowSize();
+  const [visibleModal, setVisibleModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setVisibleModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setVisibleModal(false);
+  };
 
   const topBun = data.find((item) => item.type === 'bun');
 
@@ -57,7 +70,12 @@ function BurgerConstructor({ data }) {
         />
       </div>
 
-      <Checkout text="Place an order" />
+      <Checkout onClick={handleOpenModal} text="Place an order" />
+      {visibleModal && (
+        <Modal onClose={handleCloseModal}>
+          <OrderDetails />
+        </Modal>
+      )}
     </section>
   );
 }
