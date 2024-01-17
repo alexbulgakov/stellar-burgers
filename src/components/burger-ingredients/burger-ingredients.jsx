@@ -9,59 +9,52 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import CustomTabPanel from '../custom-tab-panel/custom-tab-panel';
 import useWindowSize from '../../hooks/useWindowSize';
 import Modal from '../modal/modal';
 
 import styles from './burger-ingredients.module.css';
 
-function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      aria-labelledby={`simple-tab-${index}`}
-      id={`simple-tabpanel-${index}`}
-      hidden={value !== index}
-      role="tabpanel"
-      {...other}
-    >
-      {value === index && <Box>{children}</Box>}
-    </div>
-  );
-}
-
 function BurgerIngredients({ data }) {
-  const [value, setValue] = useState(0);
+  const [width] = useWindowSize();
+  const [tabContent, setTabContent] = useState(0);
   const [visibleModal, setVisibleModal] = useState(false);
   const [currentIngredientInModal, setCurrentIngredientInModal] = useState({});
 
-  const handleOpenModal = (ingredient) => {
+  const groupedData = groupByType(data);
+
+  function handleOpenModal(ingredient) {
     setVisibleModal(true);
     setCurrentIngredientInModal(ingredient);
-  };
+  }
 
-  const handleCloseModal = () => {
+  function handleCloseModal() {
     setVisibleModal(false);
-  };
+  }
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const [width] = useWindowSize();
+  function handleChangeTabContent(event, newValue) {
+    setTabContent(newValue);
+  }
 
-  const groupByType = (ingredients) =>
-    ingredients.reduce((acc, item) => {
+  function a11yProps(index) {
+    return {
+      'aria-controls': `simple-tabpanel-${index}`,
+      id: `simple-tab-${index}`,
+    };
+  }
+
+  function groupByType(ingredients) {
+    return ingredients.reduce((acc, item) => {
       if (!acc[item.type]) {
         acc[item.type] = [];
       }
       acc[item.type].push(item);
       return acc;
     }, {});
+  }
 
-  const groupedData = groupByType(data);
-
-  const renderGroup = (group) =>
-    group.map((ingredient) => (
+  function renderGroup(group) {
+    return group.map((ingredient) => (
       <div
         onClick={() => {
           handleOpenModal(ingredient);
@@ -88,12 +81,6 @@ function BurgerIngredients({ data }) {
         </p>
       </div>
     ));
-
-  function a11yProps(index) {
-    return {
-      'aria-controls': `simple-tabpanel-${index}`,
-      id: `simple-tab-${index}`,
-    };
   }
 
   return (
@@ -110,37 +97,25 @@ function BurgerIngredients({ data }) {
       <Box>
         <Box>
           <Tabs
+            onChange={handleChangeTabContent}
             aria-label="basic tabs example"
-            onChange={handleChange}
             variant="fullWidth"
             textColor="inherit"
-            value={value}
+            value={tabContent}
           >
             <Tab label="Buns" {...a11yProps(0)} />
             <Tab label="Sauces" {...a11yProps(1)} />
             <Tab label="Filling" {...a11yProps(2)} />
           </Tabs>
         </Box>
-        <CustomTabPanel value={value} index={0}>
-          <div className={styles.ingredientsList}>
-            <div className={styles.groupedIngredients}>
-              {groupedData.bun && renderGroup(groupedData.bun)}
-            </div>
-          </div>
+        <CustomTabPanel value={tabContent} index={0}>
+          {groupedData.bun && renderGroup(groupedData.bun)}
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-          <div className={styles.ingredientsList}>
-            <div className={styles.groupedIngredients}>
-              {groupedData.sauce && renderGroup(groupedData.sauce)}
-            </div>
-          </div>
+        <CustomTabPanel value={tabContent} index={1}>
+          {groupedData.sauce && renderGroup(groupedData.sauce)}
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          <div className={styles.ingredientsList}>
-            <div className={styles.groupedIngredients}>
-              {groupedData.main && renderGroup(groupedData.main)}
-            </div>
-          </div>
+        <CustomTabPanel value={tabContent} index={2}>
+          {groupedData.main && renderGroup(groupedData.main)}
         </CustomTabPanel>
       </Box>
       {visibleModal && (

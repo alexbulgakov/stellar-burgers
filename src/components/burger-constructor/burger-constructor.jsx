@@ -15,22 +15,19 @@ import styles from './burger-constructor.module.css';
 function BurgerConstructor({ data }) {
   const [width] = useWindowSize();
   const [visibleModal, setVisibleModal] = useState(false);
-
-  const handleOpenModal = () => {
-    setVisibleModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setVisibleModal(false);
-  };
-
-  const topBun = data.find((item) => item.type === 'bun');
-
-  const bottomBun = data.find((item) => item.type === 'bun');
-
+  const topBun = data.find((item) => item.type === 'bun'); //TODO: remove hardcode
+  const bottomBun = data.find((item) => item.type === 'bun'); //TODO: remove hardcode
   const selectedIngredients = data.filter(
     (item) => item.type === 'main' || item.type === 'sauce',
-  );
+  ); //TODO: remove hardcode
+
+  function handleOpenModal() {
+    setVisibleModal(true);
+  }
+
+  function handleCloseModal() {
+    setVisibleModal(false);
+  }
 
   return (
     <section
@@ -47,7 +44,6 @@ function BurgerConstructor({ data }) {
           isLocked
         />
       </div>
-
       <div className={`${styles.movableIngredients} pr-2`}>
         {selectedIngredients.map((ingredient) => (
           <div className={styles.ingredient} key={ingredient._id}>
@@ -69,7 +65,6 @@ function BurgerConstructor({ data }) {
           isLocked
         />
       </div>
-
       <Checkout onClick={handleOpenModal} text="Place an order" />
       {visibleModal && (
         <Modal onClose={handleCloseModal}>
