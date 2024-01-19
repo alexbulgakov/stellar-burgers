@@ -11,6 +11,7 @@ import AppHeaderMobile from '../app-header-mobile/app-header-mobile';
 import AppFooterMobile from '../app-footer-mobile/app-footer-mobile';
 import useWindowSize from '../../hooks/useWindowSize';
 import AppHeader from '../app-header/app-header';
+import api from '../../utils/api';
 
 import styles from './app.module.css';
 
@@ -70,13 +71,8 @@ function App() {
   }
 
   useEffect(() => {
-    fetch(DATA_URL)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Error occured!');
-        }
-        return res.json();
-      })
+    api
+      .getItems()
       .then((res) => {
         setData(res.data);
         setloadingStatus('loaded');
