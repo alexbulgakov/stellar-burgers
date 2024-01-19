@@ -1,16 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import CircularProgress from '@mui/material/CircularProgress';
-import AlertTitle from '@mui/material/AlertTitle';
-import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
-
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
-import AppHeaderMobile from '../app-header-mobile/app-header-mobile';
-import AppFooterMobile from '../app-footer-mobile/app-footer-mobile';
-import useWindowSize from '../../hooks/useWindowSize';
-import AppHeader from '../app-header/app-header';
+import LoadingScreen from '../loading-screen/loading-screen';
+import ErrorScreen from '../error-screen/error-screen';
+import MainScreen from '../main-screen/main-screen';
 import api from '../../utils/api';
 
 import styles from './app.module.css';
@@ -23,52 +15,8 @@ import styles from './app.module.css';
 //TODO:improve mobile layout(toggle order) using redux and reusing header
 
 function App() {
-  const DATA_URL = 'https://norma.nomoreparties.space/api/ingredients';
   const [data, setData] = useState([]);
   const [loadingStatus, setloadingStatus] = useState('loading');
-  const [width] = useWindowSize();
-
-  function renderPage() {
-    if (loadingStatus === 'loading') {
-      return (
-        <div className={styles.notification}>
-          <Box sx={{ display: 'flex' }}>
-            <CircularProgress />
-          </Box>
-        </div>
-      );
-    }
-
-    if (loadingStatus === 'loaded') {
-      return width < 1024 ? (
-        <>
-          <AppHeaderMobile />
-          <main className={styles.mainMobile}>
-            <BurgerIngredients data={data} />
-          </main>
-          <AppFooterMobile>
-            <BurgerConstructor data={data} />
-          </AppFooterMobile>
-        </>
-      ) : (
-        <>
-          <AppHeader />
-          <main className={`${styles.main} pb-2`}>
-            <BurgerIngredients data={data} />
-            <BurgerConstructor data={data} />
-          </main>
-        </>
-      );
-    }
-
-    return (
-      <div className={styles.notification}>
-        <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>Loading failed
-        </Alert>
-      </div>
-    );
-  }
 
   useEffect(() => {
     api
@@ -82,7 +30,20 @@ function App() {
       });
   }, []);
 
-  return renderPage();
+  function renderContent() {
+    switch (loadingStatus) {
+      case 'loading':
+        return <LoadingScreen />;
+      case 'loaded':
+        return <MainScreen data={data} />;
+      case 'error':
+        return <ErrorScreen />;
+      default:
+        return null;
+    }
+  }
+
+  return renderContent();
 }
 
 export default App;
