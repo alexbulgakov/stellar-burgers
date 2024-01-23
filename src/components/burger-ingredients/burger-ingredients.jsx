@@ -1,16 +1,14 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
-import {
-  CurrencyIcon,
-  Counter,
-} from '@ya.praktikum/react-developer-burger-ui-components';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import IngredientGroup from '../ingredient-group/ingredient-group';
 import CustomTabPanel from '../custom-tab-panel/custom-tab-panel';
 import useWindowSize from '../../hooks/useWindowSize';
+import { groupByType } from '../../utils/functions';
 import Modal from '../modal/modal';
 
 import styles from './burger-ingredients.module.css';
@@ -21,7 +19,7 @@ function BurgerIngredients({ data }) {
   const [visibleModal, setVisibleModal] = useState(false);
   const [currentIngredientInModal, setCurrentIngredientInModal] = useState({});
 
-  const groupedData = groupByType(data);
+  const groupedData = useMemo(() => groupByType(data), [data]);
 
   function handleOpenModal(ingredient) {
     setVisibleModal(true);
@@ -41,46 +39,6 @@ function BurgerIngredients({ data }) {
       'aria-controls': `simple-tabpanel-${index}`,
       id: `simple-tab-${index}`,
     };
-  }
-
-  function groupByType(ingredients) {
-    return ingredients.reduce((acc, item) => {
-      if (!acc[item.type]) {
-        acc[item.type] = [];
-      }
-      acc[item.type].push(item);
-      return acc;
-    }, {});
-  }
-
-  function renderGroup(group) {
-    return group.map((ingredient) => (
-      <div
-        onClick={() => {
-          handleOpenModal(ingredient);
-        }}
-        className={styles.ingredient}
-        key={ingredient._id}
-      >
-        {/* {ingredient.type === 'bun' && (
-          <Counter extraClass="m-1" size="default" count={1} />
-        )} */}
-        <img
-          className={width < 1248 ? '' : 'pl-4 pr-4'}
-          alt={`${ingredient.type}`}
-          src={ingredient.image}
-        />
-        <div className={`${styles.currency} mt-1 mb-1`}>
-          <p className="text text_type_digits-default mr-1">
-            {ingredient.price}
-          </p>
-          <CurrencyIcon type="primary" />
-        </div>
-        <p className={`text text_type_main-small ${styles.ingredientName}`}>
-          {ingredient.name}
-        </p>
-      </div>
-    ));
   }
 
   return (
@@ -109,13 +67,28 @@ function BurgerIngredients({ data }) {
           </Tabs>
         </Box>
         <CustomTabPanel value={tabContent} index={0}>
-          {groupedData.bun && renderGroup(groupedData.bun)}
+          {groupedData.bun && (
+            <IngredientGroup
+              onIngredientClick={handleOpenModal}
+              group={groupedData.bun}
+            />
+          )}
         </CustomTabPanel>
         <CustomTabPanel value={tabContent} index={1}>
-          {groupedData.sauce && renderGroup(groupedData.sauce)}
+          {groupedData.sauce && (
+            <IngredientGroup
+              onIngredientClick={handleOpenModal}
+              group={groupedData.sauce}
+            />
+          )}
         </CustomTabPanel>
         <CustomTabPanel value={tabContent} index={2}>
-          {groupedData.main && renderGroup(groupedData.main)}
+          {groupedData.main && (
+            <IngredientGroup
+              onIngredientClick={handleOpenModal}
+              group={groupedData.main}
+            />
+          )}
         </CustomTabPanel>
       </Box>
       {visibleModal && (

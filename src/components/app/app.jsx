@@ -7,28 +7,31 @@ import api from '../../utils/api';
 
 import styles from './app.module.css';
 
-/**
- * Top-level component that implements conditional rendering
- * based on screen width.
- */
-
 //TODO:improve mobile layout(toggle order) using redux and reusing header
 
+/**
+ * Renders the content based on the loading status.
+ *
+ * @return {ReactElement} The rendered content.
+ */
 function App() {
   const [data, setData] = useState([]);
-  const [loadingStatus, setloadingStatus] = useState('loading');
+  const [loadingStatus, setLoadingStatus] = useState('loading');
 
   useEffect(() => {
+    //TODO: use error boundary
     api
       .getItems()
       .then((res) => {
         setData(res.data);
-        setloadingStatus('loaded');
+        setLoadingStatus('loaded');
       })
       .catch((err) => {
-        setloadingStatus('error');
+        setLoadingStatus('error');
       });
   }, []);
+
+  //TODO: HOC?
 
   function renderContent() {
     switch (loadingStatus) {
