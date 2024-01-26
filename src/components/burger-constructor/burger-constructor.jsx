@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import {
   ConstructorElement,
@@ -7,12 +7,15 @@ import {
 
 import OrderDetails from '../order-details/order-details';
 import useWindowSize from '../../hooks/useWindowSize';
+import { DataContext } from '../../utils/dataContext';
 import Checkout from '../checkout/checkout';
 import Modal from '../modal/modal';
 
 import styles from './burger-constructor.module.css';
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor() {
+  const [setLoadingStatus, loadingStatus, setData, data] =
+    useContext(DataContext);
   const [width] = useWindowSize();
   const [visibleModal, setVisibleModal] = useState(false);
   const topBun = data.find((item) => item.type === 'bun'); //TODO: remove hardcode

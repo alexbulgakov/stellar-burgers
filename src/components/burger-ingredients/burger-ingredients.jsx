@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useContext, useEffect, useState, useMemo } from 'react';
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -7,17 +7,40 @@ import Box from '@mui/material/Box';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientGroup from '../ingredient-group/ingredient-group';
 import CustomTabPanel from '../custom-tab-panel/custom-tab-panel';
+import LoadingScreen from '../loading-screen/loading-screen';
 import useWindowSize from '../../hooks/useWindowSize';
+import { DataContext } from '../../utils/dataContext';
 import { groupByType } from '../../utils/functions';
 import Modal from '../modal/modal';
+import api from '../../utils/api';
 
 import styles from './burger-ingredients.module.css';
 
-function BurgerIngredients({ data }) {
+function BurgerIngredients() {
   const [width] = useWindowSize();
   const [tabContent, setTabContent] = useState(0);
+  const [setLoadingStatus, loadingStatus, setData, data] =
+    useContext(DataContext);
   const [visibleModal, setVisibleModal] = useState(false);
   const [currentIngredientInModal, setCurrentIngredientInModal] = useState({});
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    api
+      .getItems()
+      .then((res) => {
+        setData(res.data);
+        setLoadingStatus('loaded');
+      })
+      .catch((err) => {
+        setError(err);
+        setLoadingStatus('error');
+      });
+  }, [setData, setLoadingStatus]);
+
+  if (error) {
+    throw error;
+  }
 
   const groupedData = useMemo(() => groupByType(data), [data]);
 
@@ -41,7 +64,9 @@ function BurgerIngredients({ data }) {
     };
   }
 
-  return (
+  return loadingStatus === 'loading' ? (
+    <LoadingScreen />
+  ) : (
     <section className={styles.chooseIngredients}>
       <p
         className={`text text_type_main-large  ${

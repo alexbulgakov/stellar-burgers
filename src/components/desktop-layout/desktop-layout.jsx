@@ -1,16 +1,21 @@
+import { useContext } from 'react';
+
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import { DataContext } from '../../utils/dataContext';
 import AppHeader from '../app-header/app-header';
 
 import styles from './desktop-layout.module.css';
 
-function DesktopLayout({ data }) {
+function DesktopLayout() {
+  const [setLoadingStatus, loadingStatus, setData, data] =
+    useContext(DataContext);
   return (
     <>
       <AppHeader />
       <main className={`${styles.main} pb-2`}>
-        <BurgerIngredients data={data} />
-        <BurgerConstructor data={data} />
+        <BurgerIngredients />
+        {loadingStatus === 'loaded' && <BurgerConstructor />}
       </main>
     </>
   );
