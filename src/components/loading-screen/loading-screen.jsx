@@ -5,11 +5,9 @@ import styles from './loading-screen.module.css';
 
 function LoadingScreen() {
   return (
-    <div className={styles.loading}>
-      <Box sx={{ display: 'flex' }}>
-        <CircularProgress />
-      </Box>
-    </div>
+    <section className={styles.loading}>
+      <CircularProgress />
+    </section>
   );
 }
 

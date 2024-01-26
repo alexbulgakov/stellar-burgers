@@ -7,7 +7,7 @@ class Api {
 
   _getRes(res) {
     if (!res.ok) {
-      throw new Error('Error occured!');
+      throw new Error('Download error');
     }
     return res.json();
   }
