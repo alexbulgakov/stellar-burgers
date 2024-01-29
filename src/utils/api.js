@@ -12,8 +12,22 @@ class Api {
     return res.json();
   }
 
+  postOrder(ingredientIds) {
+    return fetch(`${this._baseUrl}/orders`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ingredients: ingredientIds }),
+      method: 'POST',
+    })
+      .then((res) => this._getRes(res))
+      .catch((err) => console.error('API error:', err));
+  }
+
   getItems() {
-    return fetch(this._baseUrl).then((res) => this._getRes(res));
+    return fetch(`${this._baseUrl}/ingredients`).then((res) =>
+      this._getRes(res),
+    );
   }
 }
 

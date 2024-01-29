@@ -8,8 +8,8 @@ import AppHeader from '../app-header/app-header';
 import styles from './desktop-layout.module.css';
 
 function DesktopLayout() {
-  const [setLoadingStatus, loadingStatus, setData, data] =
-    useContext(DataContext);
+  const [, loadingStatus, ,] = useContext(DataContext);
+
   return (
     <>
       <AppHeader />

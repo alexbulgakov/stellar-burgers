@@ -10,26 +10,42 @@ import useWindowSize from '../../hooks/useWindowSize';
 import { DataContext } from '../../utils/dataContext';
 import Checkout from '../checkout/checkout';
 import Modal from '../modal/modal';
+import api from '../../utils/api';
 
 import styles from './burger-constructor.module.css';
 
 function BurgerConstructor() {
-  const [setLoadingStatus, loadingStatus, setData, data] =
-    useContext(DataContext);
+  const [, , , data] = useContext(DataContext);
   const [width] = useWindowSize();
   const [visibleModal, setVisibleModal] = useState(false);
   const topBun = data.find((item) => item.type === 'bun'); //TODO: remove hardcode
+  const [error, setError] = useState(null);
+  const [order, setOrder] = useState({});
   const bottomBun = data.find((item) => item.type === 'bun'); //TODO: remove hardcode
   const selectedIngredients = data.filter(
     (item) => item.type === 'main' || item.type === 'sauce',
   ); //TODO: remove hardcode
 
   function handleOpenModal() {
-    setVisibleModal(true);
+    const ingredientIds = selectedIngredients.map((item) => item._id);
+
+    api
+      .postOrder(ingredientIds)
+      .then((res) => {
+        setOrder(res.order);
+        setVisibleModal(true);
+      })
+      .catch((err) => {
+        setError(err);
+      });
   }
 
   function handleCloseModal() {
     setVisibleModal(false);
+  }
+
+  if (error) {
+    throw error;
   }
 
   return (
@@ -71,7 +87,7 @@ function BurgerConstructor() {
       <Checkout onClick={handleOpenModal} text="Place an order" />
       {visibleModal && (
         <Modal onClose={handleCloseModal}>
-          <OrderDetails />
+          <OrderDetails order={order} />
         </Modal>
       )}
     </section>
